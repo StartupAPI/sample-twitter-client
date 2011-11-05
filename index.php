@@ -25,12 +25,12 @@ include_once(dirname(__FILE__).'/header.php');
 $current_user = User::get();
 
 if (is_null($current_user)) {
-	$statusnet_module = UserBaseModule::get('twitter');
-	$statusnet_module->renderRegistrationForm(true, null, array('returnto' => UserConfig::$SITEROOTURL));
+	$module = UserBaseModule::get('twitter');
+	$module->renderRegistrationForm(true, null, array('returnto' => UserConfig::$SITEROOTURL));
 } else {
-	$statusnet_creds = $current_user->getUserCredentials('twitter');
+	$creds = $current_user->getUserCredentials('twitter');
 
-	$result = $statusnet_creds->makeOAuthRequest('https://api.twitter.com/1/statuses/home_timeline.json', 'GET');
+	$result = $creds->makeOAuthRequest('https://api.twitter.com/1/statuses/home_timeline.json', 'GET');
 
 	$statuses= json_decode($result["body"], true);
 
