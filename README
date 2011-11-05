@@ -1,0 +1,7 @@
+This is a sample Twitter client application using StartupAPI.
+
+Basic functionality:
+- authentication using Twitter
+- displaying list of friends' latest posts
+
+Try this out, start by registering your app: https://dev.twitter.com/apps/new
