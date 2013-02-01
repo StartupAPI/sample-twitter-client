@@ -1,7 +1,21 @@
-This is a sample Twitter client application using StartupAPI.
+This is a sample Twitter client application using http://StartupAPI.com
 
-Basic functionality:
-- authentication using Twitter
-- displaying list of friends' latest posts
+The basic functionality demonstrated is:
+- Signup & login using your Twitter account
+- displaying list of Twitter friends' latest posts after login
 
-Try this out, start by registering your app: https://dev.twitter.com/apps/new
+To use this example with your StartupAPI code.
+
+1.  Register your app with Twitter: https://dev.twitter.com/apps/new
+2.  Add your Twitter App Consumer key and consumer secret to  users_config.php
+
+
+/**
+ * Twitter Authentication configuration
+ * Register your app here: https://dev.twitter.com/apps/new
+ * And then uncomment two lines below and copy API Key and App Secret
+ */
+UserConfig::loadModule('twitter');
+UserConfig::$modules[] = new TwitterAuthenticationModule('...api.key.goes.here...', '...api.secret.goes.here...');
+
+3. Point your browser to the example Twitter Client application
