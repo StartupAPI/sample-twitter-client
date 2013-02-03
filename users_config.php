@@ -17,6 +17,7 @@ UserConfig::$mysql_user = $mysql_user;
 UserConfig::$mysql_password = $mysql_password;
 #UserConfig::$mysql_host = 'localhost';
 #UserConfig::$mysql_port = '...port...';
+UserConfig::$mysql_socket = $mysql_socket;
 
 /**
  * Twitter Authentication configuration
@@ -24,15 +25,12 @@ UserConfig::$mysql_password = $mysql_password;
  * And then uncomment two lines below and copy API Key and App Secret
  */
 UserConfig::loadModule('twitter');
-UserConfig::$modules[] = new TwitterAuthenticationModule(
-	$twitter_OAuth_consumer_key,
-	$twitter_OAuth_consumer_secret
-);
+new TwitterAuthenticationModule($twitter_OAuth_consumer_key, $twitter_OAuth_consumer_secret);
 
 /**
  * User IDs of admins for this instance (to be able to access dashboard at /users/admin/)
  */
-UserConfig::$admins = array(  ); // usually first user has ID of 1
+#UserConfig::$admins[] = 1; // usually first user has ID of 1
 
 /**
  * Set these to point at your header and footer or leave them commented out to use default ones

@@ -17,6 +17,7 @@ $randomness = '...some.random.characters.go.here...';
 $mysql_db = 'twitter';
 $mysql_user = 'twitter';
 $mysql_password = '...password...';
+#$mysql_socket = '/tmp/mysql.sock';
 
 /**
  * Twitter OAuth consumer key and secret
