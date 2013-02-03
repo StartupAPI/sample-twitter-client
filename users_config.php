@@ -10,7 +10,7 @@ require_once(dirname(__FILE__).'/config.php');
 UserConfig::$SESSION_SECRET = $randomness;
 
 /**
- * Database connectivity 
+ * Database connectivity
  */
 UserConfig::$mysql_db = $mysql_db;
 UserConfig::$mysql_user = $mysql_user;
@@ -30,7 +30,12 @@ new TwitterAuthenticationModule($twitter_OAuth_consumer_key, $twitter_OAuth_cons
 /**
  * User IDs of admins for this instance (to be able to access dashboard at /users/admin/)
  */
-#UserConfig::$admins[] = 1; // usually first user has ID of 1
+UserConfig::$admins[] = 1; // usually first user has ID of 1
+
+/*
+ * Name of your application to be used in UI and emails to users
+ */
+UserConfig::$appName = 'Sample Twitter Client';
 
 /**
  * Set these to point at your header and footer or leave them commented out to use default ones
