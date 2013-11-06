@@ -30,7 +30,7 @@ if (is_null($current_user)) {
 } else {
 	$creds = $current_user->getUserCredentials('twitter');
 
-	$result = $creds->makeOAuthRequest('https://api.twitter.com/1/statuses/home_timeline.json', 'GET');
+	$result = $creds->makeOAuthRequest('https://api.twitter.com/1.1/statuses/home_timeline.json', 'GET');
 
 	$statuses= json_decode($result["body"], true);
 
