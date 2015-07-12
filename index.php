@@ -25,7 +25,7 @@ include_once(dirname(__FILE__).'/header.php');
 $current_user = User::get();
 
 if (is_null($current_user)) {
-	$module = UserBaseModule::get('twitter');
+	$module = StartupAPIModule::get('twitter');
 	$module->renderRegistrationForm(true, null, array('returnto' => UserConfig::$SITEROOTURL));
 } else {
 	$creds = $current_user->getUserCredentials('twitter');

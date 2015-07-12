@@ -15,9 +15,9 @@ UserConfig::$SESSION_SECRET = $randomness;
 UserConfig::$mysql_db = $mysql_db;
 UserConfig::$mysql_user = $mysql_user;
 UserConfig::$mysql_password = $mysql_password;
-#UserConfig::$mysql_host = 'localhost';
-#UserConfig::$mysql_port = '...port...';
-UserConfig::$mysql_socket = $mysql_socket;
+UserConfig::$mysql_host = isset($mysql_host) ? $mysql_host : 'localhost';
+UserConfig::$mysql_port = isset($mysql_port) ? $mysql_port : 3306;
+UserConfig::$mysql_socket = isset($mysql_port) ? $mysql_socket : null;
 
 /**
  * Twitter Authentication configuration
