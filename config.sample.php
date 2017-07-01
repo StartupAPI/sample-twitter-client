@@ -27,6 +27,11 @@ $twitter_OAuth_consumer_key = '...twitter.oauth.key.goes.here...';
 $twitter_OAuth_consumer_secret = '...twitter.oauth.secret.goes.here...';
 
 /**
+ * Array of admin IDs
+ */
+$admins = []; // Usually first user has an ID of 1
+
+/**
  * SMTP host
  */
 $amazonSMTPHost = 'email-smtp.us-east-1.amazonaws.com';
