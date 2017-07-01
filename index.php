@@ -1,50 +1,34 @@
 <?php
 include_once(dirname(__FILE__).'/users/users.php');
-include_once(dirname(__FILE__).'/header.php');
-?>
-<style>
-.status {
-	border-bottom: 1px dotted silver;
-}
 
-.status img {
-	float: left; margin: 0.5em;
-}
+$user = StartupAPI::requireLogin();
 
-.message {
-	
-}
+// start with global template data needed for Startup API menus and stuff
+$template_info = StartupAPI::getTemplateInfo();
 
-.tool {
-	font-size: xx-small;
-	color: silver;
-}
-</style>
-<?php
+if ($user) {
+	$template_info['name'] = $user->getName();
 
-$current_user = User::get();
+	$twitter_credentials = $user->getUserCredentials('twitter');
 
-if (is_null($current_user)) {
-	$module = StartupAPIModule::get('twitter');
-	$module->renderRegistrationForm(true, null, array('returnto' => UserConfig::$SITEROOTURL));
-} else {
-	$creds = $current_user->getUserCredentials('twitter');
+	try {
+		$result = $twitter_credentials->makeOAuthRequest(
+			'https://api.twitter.com/1.1/statuses/home_timeline.json', 'GET'
+		);
 
-	$result = $creds->makeOAuthRequest('https://api.twitter.com/1.1/statuses/home_timeline.json', 'GET');
+		$statuses = json_decode($result["body"], true);
 
-	$statuses= json_decode($result["body"], true);
-
-	foreach ($statuses as $status) {
-		?>
-		<p class="status">
-		<img src="<?php echo UserTools::escape($status["user"]["profile_image_url"]) ?>" />
-		<div class="message"><?php echo UserTools::escape($status["text"]) ?></div>
-		<div class="tool">Posted using <?php echo $status["source"] ?></div>
-		</p>
-		<div style="clear: both"/>
-		<?php
+		foreach ($statuses as $status) {
+			$template_info['statuses'][] = [
+				"profile_image_url" => $status["user"]["profile_image_url"],
+				"text" => $status["text"],
+				"source" => $status["source"]
+			];
+		}
+	} catch (OAuthException2 $ex) {
+		$template_info['twitter_error'] = $ex->getMessage();
 	}
-	
 }
 
-include_once(dirname(__FILE__).'/footer.php');
+StartupAPI::$template->getLoader()->addPath(__DIR__ . '/templates', 'app');
+StartupAPI::$template->display('@app/index.html.twig', $template_info);

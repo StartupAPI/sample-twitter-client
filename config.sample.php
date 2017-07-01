@@ -21,7 +21,22 @@ $mysql_password = '...password...';
 
 /**
  * Twitter OAuth consumer key and secret
- * Register your app here: https://dev.twitter.com/apps/new
+ * Register your app here: https://apps.twitter.com/app/new
  */
 $twitter_OAuth_consumer_key = '...twitter.oauth.key.goes.here...';
 $twitter_OAuth_consumer_secret = '...twitter.oauth.secret.goes.here...';
+
+/**
+ * SMTP host
+ */
+$amazonSMTPHost = 'email-smtp.us-east-1.amazonaws.com';
+
+/**
+ * SMTP UserName
+ */
+$amazonSMTPUserName = '';
+
+/**
+ * SMTP Password
+ */
+$amazonSMTPPassword = '';

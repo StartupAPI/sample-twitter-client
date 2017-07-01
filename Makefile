@@ -1,4 +1,4 @@
-all:	checkconfig updatecode updateusers 
+all:	checkconfig updateusers
 
 checkconfig:
 ifeq "$(wildcard config.php)" ""
@@ -7,13 +7,6 @@ ifeq "$(wildcard config.php)" ""
 	@echo =	Start by copying config.sample.php
 	@echo =
 	@exit 1
-endif
-
-updatecode:
-ifneq "$(wildcard .git )" ""
-	git pull origin master
-	git submodule init
-	git submodule update
 endif
 
 updateusers:

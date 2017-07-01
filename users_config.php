@@ -21,7 +21,7 @@ UserConfig::$mysql_socket = isset($mysql_port) ? $mysql_socket : null;
 
 /**
  * Twitter Authentication configuration
- * Register your app here: https://dev.twitter.com/apps/new
+ * Register your app here: https://apps.twitter.com/app/new
  * And then uncomment two lines below and copy API Key and App Secret
  */
 UserConfig::loadModule('twitter');
@@ -36,6 +36,21 @@ UserConfig::$admins[] = 1; // usually first user has ID of 1
  * Name of your application to be used in UI and emails to users
  */
 UserConfig::$appName = 'Sample Twitter Client';
+
+/**
+ * Email configuration
+ */
+UserConfig::$supportEmailFromName = 'Sample App Support';
+UserConfig::$supportEmailFromEmail = 'support@startupapi.com';
+UserConfig::$supportEmailReplyTo = 'support@startupapi.com';
+
+if ($amazonSMTPHost && $amazonSMTPUserName && $amazonSMTPPassword) {
+  UserConfig::$mailer = Swift_Mailer::newInstance(
+    Swift_SmtpTransport::newInstance($amazonSMTPHost, 587, 'tls')
+      ->setUsername($amazonSMTPUserName)
+      ->setPassword($amazonSMTPPassword)
+  );
+}
 
 /**
  * Set these to point at your header and footer or leave them commented out to use default ones

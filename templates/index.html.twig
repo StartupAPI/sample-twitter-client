@@ -1,0 +1,35 @@
+{% extends '@startupapi/page.html.twig' %}
+{% block content %}
+<style>
+.status {
+	border-bottom: 1px dotted silver;
+	clear: both;
+}
+
+.status img {
+	float: left; margin: 0.5em;
+}
+
+.tool {
+	font-size: xx-small;
+	color: silver;
+}
+</style>
+<div class="container">
+	<div class="row">
+		<h1>Welcome, {{name}}!</h1>
+
+		{% if twitter_error %}
+			<div class="well">{{twitter_error}}</div>
+		{% else %}
+			{% for status in statuses %}
+			<p class="status">
+				<img src="{{status.profile_image_url}}"/>
+				<div class="message">{{status.text}}</div>
+				<div class="tool">Posted using {{status.source}}</div>
+			</p>
+			{% endfor %}
+		{% endif %}
+	</div>
+</div>
+{% endblock %}
